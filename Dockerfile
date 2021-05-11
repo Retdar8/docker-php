@@ -5,7 +5,7 @@ MAINTAINER Jin<cpp@strcpy.cn>
 ENV PORT 9000
 
 # 更新镜像源
-RUN /etc/apt/sources.list /etc/apt/sources.list.bak
+RUN mv /etc/apt/sources.list /etc/apt/sources.list.bak
 COPY docker-file/sources.list.jessie /etc/apt/sources.list
 
 # 安装包
