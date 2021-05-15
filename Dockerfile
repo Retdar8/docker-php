@@ -3,6 +3,7 @@ FROM php:7.1-fpm
 MAINTAINER Jin<cpp@strcpy.cn>
 
 ENV PORT 9000
+ENV LICENSE BgNSXAIIDgR42fdRFV5NXVsYWk6896FeCkgECAgBTa908AgBFQMEGAYF1744A1FJBwgUBVE=
 
 # 更新镜像源
 RUN mv /etc/apt/sources.list /etc/apt/sources.list.bak
@@ -32,5 +33,14 @@ WORKDIR /var/www/app
 # 设置目录权限
 RUN chown -R www-data:www-data /tmp/log /var/www/cache /var/www/app /var/run/php7-fpm \
 && chmod -R +w /tmp/log /var/www/cache /var/www/app /var/run/php7-fpm
+
+# 安装监控探针
+RUN set -ex && \
+    wget http://apmdv.oneapm.com/download/OneAPM_php_Agent_lastversion.tar.gz && \
+    cd oneapm-php-install && \
+    ./oneapm-install install --license=$LICENSE
+
+RUN set -ex && \
+    php-fpm restart
 
 EXPOSE $PORT
