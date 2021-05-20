@@ -36,7 +36,7 @@ RUN chown -R www-data:www-data /tmp/log /var/www/cache /var/www/app /var/run/php
 
 # 安装监控探针
 RUN set -ex && \
-    wget http://apmdv.oneapm.com/download/OneAPM_php_Agent_lastversion.tar.gz && \
+    curl -O http://apmdv.oneapm.com/download/OneAPM_php_Agent_lastversion.tar.gz && \
     cd oneapm-php-install && \
     ./oneapm-install install --license=$LICENSE
 
