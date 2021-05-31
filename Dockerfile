@@ -1,5 +1,5 @@
 # 原php包依赖于debian jessie
-FROM php:7.1-fpm
+FROM php:7.0-fpm
 MAINTAINER Jin<cpp@strcpy.cn>
 
 ENV PORT 9000
@@ -33,14 +33,5 @@ WORKDIR /var/www/app
 # 设置目录权限
 RUN chown -R www-data:www-data /tmp/log /var/www/cache /var/www/app /var/run/php7-fpm \
 && chmod -R +w /tmp/log /var/www/cache /var/www/app /var/run/php7-fpm
-
-# 安装监控探针
-RUN set -ex && \
-    curl -O http://apmdv.oneapm.com/download/OneAPM_php_Agent_lastversion.tar.gz && \
-    cd oneapm-php-install && \
-    ./oneapm-install install --license=$LICENSE
-
-RUN set -ex && \
-    php-fpm restart
 
 EXPOSE $PORT
