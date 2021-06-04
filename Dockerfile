@@ -3,7 +3,7 @@ FROM php:7.0-fpm
 MAINTAINER Jin<cpp@strcpy.cn>
 
 ENV PORT 9000
-ENV LICENSE BgNSXAIIDgR42fdRFV5NXVsYWk6896FeCkgECAgBTa908AgBFQMEGAYF1744A1FJBwgUBVE=
+ENV SHOW test1
 
 # 更新镜像源
 RUN mv /etc/apt/sources.list /etc/apt/sources.list.bak
@@ -29,6 +29,9 @@ RUN echo "Asia/Shanghai" > /etc/timezone && dpkg-reconfigure -f noninteractive t
 
 # 设置工作目录
 WORKDIR /var/www/app
+
+RUN set -ex && \
+    echo $SHOW > /var/www/app/index.php
 
 # 设置目录权限
 RUN chown -R www-data:www-data /tmp/log /var/www/cache /var/www/app /var/run/php7-fpm \
