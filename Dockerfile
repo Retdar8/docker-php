@@ -37,4 +37,8 @@ RUN set -ex && \
 RUN chown -R www-data:www-data /tmp/log /var/www/cache /var/www/app /var/run/php7-fpm \
 && chmod -R +w /tmp/log /var/www/cache /var/www/app /var/run/php7-fpm
 
+COPY docker-file/php.ini /usr/local/etc/php
+COPY docker-file/php-fpm.conf /usr/local/etc/php
+COPY docker-file/php-fpm.d /usr/local/etc/php-fpm.d
+
 EXPOSE $PORT
